@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DocumentUpload from './components/DocumentUpload';
 import DocumentHistory from './components/DocumentHistory';
+import AnimatedBackground from './components/AnimatedBackground';
 import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
 
   return (
     <div className="App">
+      <AnimatedBackground />
       <nav className="app-nav">
         <button 
           onClick={() => setCurrentPage('upload')}
