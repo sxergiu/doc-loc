@@ -5,15 +5,79 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wave 1 */
+.upload-page::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(99, 102, 241, 0.3) 25%, 
+    rgba(139, 92, 246, 0.4) 50%, 
+    rgba(99, 102, 241, 0.3) 75%, 
+    transparent 100%);
+  border-radius: 50%;
+  animation: wave1 12s ease-in-out infinite;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+@keyframes wave1 {
+  0%, 100% {
+    transform: translateX(-50%) translateY(60%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-30%) translateY(50%) rotate(180deg);
+  }
+}
+
+/* Wave 2 */
+.upload-page::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.25) 25%, 
+    rgba(99, 102, 241, 0.35) 50%, 
+    rgba(59, 130, 246, 0.25) 75%, 
+    transparent 100%);
+  border-radius: 45%;
+  animation: wave2 16s ease-in-out infinite;
+  pointer-events: none;
+  transform-origin: center;
+  animation-delay: -2s;
+}
+
+@keyframes wave2 {
+  0%, 100% {
+    transform: translateX(-50%) translateY(70%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-20%) translateY(55%) rotate(-180deg);
+  }
 }
 
 .upload-container {
   max-width: 700px;
   width: 100%;
-  background: #1a1a1a;
+  background: rgba(26, 26, 26, 0.92);
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
 }
 
 .upload-header {
