@@ -48,9 +48,9 @@ public class SummaryServiceImpl implements SummaryService {
 
         try {
             SummaryResult result = aiClient.summarize(document.getContent(), document.getFilename(), provider, model);
-            summary.setSummaryText(result.getSummaryText());
-            summary.setAiProvider(result.getProvider() != null ? result.getProvider() : provider);
-            summary.setAiModel(result.getModel() != null ? result.getModel() : model);
+            summary.setSummaryText(result.summaryText());
+            summary.setAiProvider(result.provider() != null ? result.provider() : provider);
+            summary.setAiModel(result.model() != null ? result.model() : model);
             summary.setStatus(SummaryStatus.READY);
         } catch (AiClientException ex) {
             summary.setStatus(SummaryStatus.FAILED);
