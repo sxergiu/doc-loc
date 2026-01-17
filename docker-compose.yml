@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    container_name: doc-loc-postgres
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - doc-loc-network
+
+  backend:
+    build:
+      context: ./doc-loc-backend
+      dockerfile: Dockerfile
+    container_name: doc-loc-backend
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - postgres
+    networks:
+      - doc-loc-network
+
+  frontend:
+    build:
+      context: ./Client/client
+      dockerfile: Dockerfile
+    container_name: doc-loc-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - doc-loc-network
+
+networks:
+  doc-loc-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
